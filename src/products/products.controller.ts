@@ -1,25 +1,25 @@
 import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 @Controller('products')
-export class ProductsController {
 
+// eslint-disable-next-line import/prefer-default-export
+export class ProductsController {
   @Get()
   getAll(): string {
-    return 'getAll';
+		return 'getAll';
   }
 
   @Get(':id')
   getOne(@Param('id') id: string): string {
-    return 'getOne' + id;
+    return `getOne${id}`;
   }
 
   @Post()
-  create(){
-
-  }
+  create() {}
 
   @Delete()
-  delete(){
+  delete() {}
 
-  }
+  @Put()
+  put() {}
 }

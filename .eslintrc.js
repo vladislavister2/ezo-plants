@@ -9,8 +9,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'airbnb-base',
-    'airbnb-typescript/base'
+    'airbnb-base'
   ],
   root: true,
   env: {
@@ -32,6 +31,9 @@ module.exports = {
     'no-alert': 'off',
     'prefer-destructuring': 'off',
     'indent': [2, "tab"],
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'no-mixed-spaces-and-tabs': 'off',
+    'class-methods-use-this': 'off',
+    'no-trailing-spaces': 'off'
   },
 };
