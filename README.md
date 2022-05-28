@@ -38,4 +38,4 @@ Nest.js is a progressive Node.js framework, which extends frameworks like Expres
 
 -MySQL + TypeOrm
 
-MongoDB is not using tables for relationships. Data is stored in the form of JSON style document - structure of a single object is clear. Also MongoDB is easy to scale. Mongoose is an object document modeling layer that sits on top of Node's MongoDB driver. It has built in validation for schema definitions. Mongoose defines a schema for your data models so your documents follow a specific structure with pre-defined data types.
+MySQL is a classical SQL database. TypeORM is an ORM that can run in NodeJS, Browser, Cordova, PhoneGap, Ionic, React Native, NativeScript, Expo, and Electron platforms and can be used with TypeScript and JavaScript (ES5, ES6, ES7, ES8). Its goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases - from small applications with a few tables to large scale enterprise applications with multiple databases.
