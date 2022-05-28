@@ -36,6 +36,6 @@ Admin has following rights and options:
 
 Nest.js is a progressive Node.js framework, which extends frameworks like Express by adding modular organization. The use of modular structure simplifies the division of the project into separate blocks. It uses TypeScript which enabless developers to add types to our variables and provides compile errors and warnings based on them.
 
--MongoDB + Mongoose
+-MySQL + TypeOrm
 
 MongoDB is not using tables for relationships. Data is stored in the form of JSON style document - structure of a single object is clear. Also MongoDB is easy to scale. Mongoose is an object document modeling layer that sits on top of Node's MongoDB driver. It has built in validation for schema definitions. Mongoose defines a schema for your data models so your documents follow a specific structure with pre-defined data types.
