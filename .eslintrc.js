@@ -30,10 +30,16 @@ module.exports = {
     'no-tabs': 'off',
     'no-alert': 'off',
     'prefer-destructuring': 'off',
-    'indent': [2, "tab"],
+    'indent': 'off',
     'no-param-reassign': 'off',
     'no-mixed-spaces-and-tabs': 'off',
     'class-methods-use-this': 'off',
-    'no-trailing-spaces': 'off'
+    'no-trailing-spaces': 'off',
+    'object-curly-newline': 'off',
+    'no-template-curly-in-string': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-unresolved':'off',
+    'import/no-extraneous-dependencies': 'off',
+    'no-useless-constructor':'off'
   },
 };
