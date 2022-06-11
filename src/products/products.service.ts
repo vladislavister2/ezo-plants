@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateUserDto } from '../users/dto/update-user.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -31,4 +31,14 @@ export class ProductsService {
     return 'Deleted unsuccessfully';
   }
 
+  update(id: number, productDto: UpdateProductDto) {
+    for (let i = 0; i < this.products.length; i++) {
+      if (Number(this.products[i].id) === Number(id)) {
+        this.products[i].title = productDto.title;
+        this.products[i].price = productDto.price;
+        return 'Updated successfully';
+      }
+    }
+    return 'Updated unsuccessfully';
+  }
 }
