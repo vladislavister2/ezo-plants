@@ -1,13 +1,17 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 
 export class CreateUserDto {
+  @IsNotEmpty()
+  @MinLength(3)
   readonly login: string;
 
   @IsNotEmpty()
+  @MinLength(4)
   readonly password: string;
 
+  @IsNotEmpty()
   @IsEmail()
-  readonly mail: string;
+  readonly email: string;
 
   // cart: products[];
 }

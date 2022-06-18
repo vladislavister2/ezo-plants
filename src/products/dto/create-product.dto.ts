@@ -1,6 +1,7 @@
-import { IsNumberString } from 'class-validator';
+import { IsNotEmpty, IsNumberString } from "class-validator";
 
 export class CreateProductDto {
+  @IsNotEmpty()
   readonly title: string;
 
   @IsNumberString()

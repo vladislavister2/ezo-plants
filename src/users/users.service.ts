@@ -1,46 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UpdateProductDto } from "../products/dto/update-product.dto";
+
+import { User } from '../entity/user.entity';
 
 @Injectable()
 export class UsersService {
-  private users = [];
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
 
-  getAll() {
-    return this.users;
+  async getAll(): Promise<User[]> {
+    return this.usersRepository.find();
   }
 
-  getById(id: string) {
-    return this.users.find((p) => p.id === id);
+  async getById(id: number): Promise<User> {
+    return this.usersRepository.findOneById(id);
   }
 
-  create(productDto: CreateUserDto) {
-    this.users.push({
-      ...productDto,
-      id: Date.now().toString(),
-    });
+  async create(createUserDto: CreateUserDto) {
+    const newUser = this.usersRepository.create(createUserDto);
+    return this.usersRepository.save(newUser);
   }
 
-  delete(id: number) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (Number(this.users[i].id) === Number(id)) {
-        this.users.splice(i, 1);
-        return 'Deleted successfully';
-      }
-    }
-    return 'Deleted unsuccessfully';
+  async remove(id: string): Promise<void> {
+    await this.usersRepository.delete(id);
   }
 
-  update(id: number, usersDto: UpdateUserDto) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (Number(this.users[i].id) === Number(id)) {
-        this.users[i].login = usersDto.login;
-        this.users[i].password = usersDto.password;
-        this.users[i].mail = usersDto.mail;
-        return 'Updated successfully';
-      }
-    }
-    return 'Updated unsuccessfully';
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return this.usersRepository.update(id, updateUserDto);
   }
 }

@@ -7,5 +7,5 @@ export class UpdateUserDto {
   readonly password: string;
 
   @IsEmail()
-  readonly mail: string;
+  readonly email: string;
 }
