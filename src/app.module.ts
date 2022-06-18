@@ -8,6 +8,11 @@ import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
 import { InfoArticlesModule } from './info-articles/info-articles.module';
 import { User } from './users/users.model';
+import { Product } from './products/products.model';
+import { RolesModule } from './roles/roles.module';
+import { Role } from './roles/roles.model';
+import { UserRoles } from "./roles/user-roles.model";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,9 +30,12 @@ import { User } from './users/users.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [User, Product, Role, UserRoles],
       autoLoadModels: true,
     }),
+    RolesModule,
+    UserRoles,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
