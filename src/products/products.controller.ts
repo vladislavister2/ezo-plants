@@ -12,7 +12,7 @@ import {
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductsService } from './products.service';
-import { Product } from '../entity/product.entity';
+import { Product } from "./products.model";
 
 @Controller('products')
 

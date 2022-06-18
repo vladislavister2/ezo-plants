@@ -15,9 +15,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {
-
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   getAll() {
@@ -36,12 +34,12 @@ export class UsersController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(@Param('id') id: number) {
     return this.usersService.remove(id);
   }
 
   @Put(':id')
-  update(@Body() updateUserDto: UpdateUserDto, @Param('id') id: string) {
+  update(@Body() updateUserDto: UpdateUserDto, @Param('id') id: number) {
     return this.usersService.update(id, updateUserDto);
   }
 }
