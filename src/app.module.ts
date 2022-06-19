@@ -13,6 +13,11 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
+import { Category } from "./category/category.model";
+import { CategoryController } from './category/category.controller';
+import { CategoryService } from './category/category.service';
+import { CategoryModule } from './category/category.module';
+import { CategoryProducts } from "./category/category-products.model";
 
 @Module({
   imports: [
@@ -30,12 +35,13 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Product, Role, UserRoles],
+      models: [User, Product, Role, UserRoles, Category, CategoryProducts],
       autoLoadModels: true,
     }),
     RolesModule,
-    UserRoles,
+    UsersModule,
     AuthModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

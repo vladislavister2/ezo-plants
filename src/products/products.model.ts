@@ -1,4 +1,12 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Category } from '../category/category.model';
+import { CategoryProducts } from '../category/category-products.model';
 
 interface ProductCreationAttrs {
   email: string;
@@ -6,7 +14,7 @@ interface ProductCreationAttrs {
 }
 
 @Table({ tableName: 'products' })
-export class Product extends Model<Product> {
+export class Product extends Model<Product, ProductCreationAttrs> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -32,4 +40,7 @@ export class Product extends Model<Product> {
     defaultValue: false,
   })
   isAvailable: boolean;
+
+  @BelongsToMany(() => Category, () => CategoryProducts)
+  categories: Category[];
 }

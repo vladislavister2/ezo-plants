@@ -36,7 +36,7 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.getById(id);
-    return 'none';
+    return user.update(updateUserDto);
   }
 
   async getUsersByEmail(email: string) {
