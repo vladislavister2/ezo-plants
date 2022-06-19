@@ -6,10 +6,10 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Product } from '../products/products.model';
-import { Category } from './category.model';
+import { Cart } from './cart.model';
 
-@Table({ tableName: 'category_products', createdAt: false, updatedAt: false })
-export class CategoryProducts extends Model<CategoryProducts> {
+@Table({ tableName: 'cart_products' })
+export class CartProducts extends Model<CartProducts> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -18,17 +18,17 @@ export class CategoryProducts extends Model<CategoryProducts> {
   })
   id: number;
 
+  @ForeignKey(() => Cart)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  cartID: number;
+
   @ForeignKey(() => Product)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  productId: number;
-
-  @ForeignKey(() => Category)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  categoryId: number;
+  productID: number;
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from "@nestjs/sequelize";
-import { Category } from "./category.model";
-import { CreateCategoryDto } from "./dto/create-category.dto";
-import { UpdateUserDto } from "../users/dto/update-user.dto";
+import { InjectModel } from '@nestjs/sequelize';
+import { Category } from './category.model';
+import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -33,5 +32,4 @@ export class CategoryService {
     const user = await this.getById(id);
     return user.update(dto);
   }
-
 }

@@ -1,4 +1,5 @@
 import {
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -6,10 +7,11 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from '../users/users.model';
-import { Role } from './roles.model';
+import { Product } from '../products/products.model';
+import { CartProducts } from './cart-products.model';
 
-@Table({ tableName: 'user_roles', createdAt: false, updatedAt: false })
-export class UserRoles extends Model<UserRoles> {
+@Table({ tableName: 'cart' })
+export class Cart extends Model<Cart> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -18,17 +20,14 @@ export class UserRoles extends Model<UserRoles> {
   })
   id: number;
 
-  @ForeignKey(() => Role)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  roleId: number;
-
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
+    unique: true,
     allowNull: false,
   })
-  userId: number;
+  userID: number;
+
+  @BelongsToMany(() => Product, () => CartProducts)
+  categories: Product[];
 }

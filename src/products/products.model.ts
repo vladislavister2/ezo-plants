@@ -7,6 +7,8 @@ import {
 } from 'sequelize-typescript';
 import { Category } from '../category/category.model';
 import { CategoryProducts } from '../category/category-products.model';
+import { Cart } from '../cart/cart.model';
+import { CartProducts } from '../cart/cart-products.model';
 
 interface ProductCreationAttrs {
   email: string;
@@ -43,4 +45,7 @@ export class Product extends Model<Product, ProductCreationAttrs> {
 
   @BelongsToMany(() => Category, () => CategoryProducts)
   categories: Category[];
+
+  @BelongsToMany(() => Cart, () => CartProducts)
+  carts: Cart[];
 }
