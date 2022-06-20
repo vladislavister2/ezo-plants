@@ -1,7 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class UpdateCartProductsDto {
-  @IsNotEmpty()
   readonly id: number;
 
   @IsNotEmpty()

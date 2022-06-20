@@ -1,16 +1,18 @@
 import {
   BelongsToMany,
   Column,
-  DataType,
+  DataType, HasOne,
   Model,
-  Table,
-} from 'sequelize-typescript';
+  Table
+} from "sequelize-typescript";
 import { UserRoles } from '../roles/user-roles.model';
 import { Role } from '../roles/roles.model';
+import { Cart } from "../cart/cart.model";
 
 interface UserCreationAttrs {
   email: string;
   password: string;
+  isBanned: boolean;
 }
 
 @Table({ tableName: 'users' })
@@ -44,4 +46,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasOne(() => Cart)
+  cart: Cart;
 }

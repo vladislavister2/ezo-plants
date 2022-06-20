@@ -9,5 +9,5 @@ export class CreateUserDto {
   @MinLength(4)
   readonly password: string;
 
-  // cart: products[];
+  readonly isBanned: boolean;
 }

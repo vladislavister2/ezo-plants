@@ -4,6 +4,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './users.model';
 import { RolesService } from '../roles/roles.service';
+import { Cart } from "../cart/cart.model";
+import { CartService } from "../cart/cart.service";
 
 @Injectable()
 export class UsersService {
@@ -11,6 +13,7 @@ export class UsersService {
     @InjectModel(User)
     private usersRepository: typeof User,
     private roleService: RolesService,
+    private cartService: CartService,
   ) {}
 
   async getAll(): Promise<User[]> {
@@ -26,6 +29,7 @@ export class UsersService {
     const role = await this.roleService.getRoleByValue('USER');
     await newUser.$set('roles', [role.id]);
     newUser.roles = [role];
+    await this.cartService.create(newUser.id);
     return newUser;
   }
 

@@ -22,13 +22,20 @@ export class CartService {
     return this.cartRepository.findByPk(id);
   }
 
-  async create(dto: CreateCartDto) {
-    const newCart = await this.cartRepository.create(dto);
+  async create(UserId: number) {
+    const newCart = await this.cartRepository.create({ userId: UserId });
     return newCart;
   }
 
+
+  async getCartProductsById(id: number): Promise<Cart> {
+    return this.cartRepository.findByPk(id);
+  }
+
   async addProductToCart(id: number, dto: UpdateCartProductsDto) {
-    const cartProducts = await this.getById(id);
+    const newCart = await this.cartRepository.findByPk(id);
+    const cartProducts = await this.getCartProductsById(id);
+    await newCart.$add('products', [cartProducts.id]);
     return cartProducts.update(dto);
   }
 

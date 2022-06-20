@@ -1,17 +1,24 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
   ForeignKey,
+  HasOne,
   Model,
-  Table,
-} from 'sequelize-typescript';
+  Table
+} from "sequelize-typescript";
 import { User } from '../users/users.model';
 import { Product } from '../products/products.model';
 import { CartProducts } from './cart-products.model';
+import { Order } from '../order/order.model';
+
+interface CartCreationAttrs {
+  userId: number;
+}
 
 @Table({ tableName: 'cart' })
-export class Cart extends Model<Cart> {
+export class Cart extends Model<Cart, CartCreationAttrs> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -26,8 +33,14 @@ export class Cart extends Model<Cart> {
     unique: true,
     allowNull: false,
   })
-  userID: number;
+  userId: number;
 
   @BelongsToMany(() => Product, () => CartProducts)
-  categories: Product[];
+  products: CartProducts[];
+
+  @HasOne(() => Order)
+  order: Order;
+
+  @BelongsTo(() => User)
+  user: User;
 }

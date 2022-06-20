@@ -31,8 +31,8 @@ export class ProductsService {
     await product.destroy();
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, dto: UpdateProductDto) {
     const user = await this.getById(id);
-    return 'none';
+    return user.update(dto);
   }
 }

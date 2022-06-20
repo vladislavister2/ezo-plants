@@ -11,6 +11,7 @@ import {
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateUserDto } from "../users/dto/update-user.dto";
+import { UpdateCategoryDto } from "./dto/update-category.dto";
 
 @Controller('category')
 export class CategoryController {
@@ -38,7 +39,9 @@ export class CategoryController {
   }
 
   @Put(':id')
-  update(@Body() dto: CreateCategoryDto, @Param('id') id: number) {
+  update(@Body() dto: UpdateCategoryDto, @Param('id') id: number) {
     return this.categoryService.update(id, dto);
   }
+
+
 }

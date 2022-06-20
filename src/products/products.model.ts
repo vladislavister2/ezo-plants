@@ -11,8 +11,9 @@ import { Cart } from '../cart/cart.model';
 import { CartProducts } from '../cart/cart-products.model';
 
 interface ProductCreationAttrs {
-  email: string;
-  password: string;
+  title: string;
+  describe: string;
+  isAvailable: boolean;
 }
 
 @Table({ tableName: 'products' })
@@ -31,11 +32,12 @@ export class Product extends Model<Product, ProductCreationAttrs> {
   })
   title: string;
 
+
   @Column({
-    type: DataType.STRING,
-    allowNull: true,
+    type: DataType.INTEGER,
+    allowNull: false,
   })
-  describe: string;
+  price: number;
 
   @Column({
     type: DataType.BOOLEAN,

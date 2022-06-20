@@ -19,6 +19,8 @@ import { CategoryProducts } from './category/category-products.model';
 import { CartModule } from './cart/cart.module';
 import { CartProducts } from './cart/cart-products.model';
 import { Cart } from './cart/cart.model';
+import { OrderModule } from './order/order.module';
+import { Order } from "./order/order.model";
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { Cart } from './cart/cart.model';
         CategoryProducts,
         CartProducts,
         Cart,
+        Order,
       ],
       autoLoadModels: true,
     }),
@@ -53,6 +56,7 @@ import { Cart } from './cart/cart.model';
     AuthModule,
     CategoryModule,
     CartModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

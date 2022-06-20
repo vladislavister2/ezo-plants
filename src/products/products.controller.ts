@@ -42,7 +42,7 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Body() updateProductDto: UpdateProductDto, @Param('id') id: string) {
-    return this.productsService.update(id, updateProductDto);
+  update(@Param('id') id: string, @Body() dto: UpdateProductDto) {
+    return this.productsService.update(id, dto);
   }
 }

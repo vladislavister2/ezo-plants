@@ -5,10 +5,16 @@ import { UsersService } from './users.service';
 import { User } from './users.model';
 import { Role } from '../roles/roles.model';
 import { RolesModule } from '../roles/roles.module';
-import { UserRoles } from "../roles/user-roles.model";
+import { UserRoles } from '../roles/user-roles.model';
+import { Cart } from '../cart/cart.model';
+import { CartModule } from '../cart/cart.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([User, Role, UserRoles]), RolesModule],
+  imports: [
+    SequelizeModule.forFeature([User, Role, UserRoles, Cart]),
+    RolesModule,
+    CartModule,
+  ],
   exports: [UsersService],
   controllers: [UsersController],
   providers: [UsersService],
