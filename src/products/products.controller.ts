@@ -16,7 +16,6 @@ import { Product } from "./products.model";
 
 @Controller('products')
 
-// eslint-disable-next-line import/prefer-default-export
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

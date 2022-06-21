@@ -6,16 +6,32 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  Post, Put
-} from "@nestjs/common";
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateUserDto } from "../users/dto/update-user.dto";
-import { UpdateCategoryDto } from "./dto/update-category.dto";
+import { UpdateCategoryDto } from './dto/update-category.dto';
+import { AddProductToCategoryDto } from './dto/add-product-to-category.dto';
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
+
+  @Post('/addProductToCategory')
+  addProduct(@Body() dto: AddProductToCategoryDto) {
+    return this.categoryService.addProductToCategory(dto);
+  }
+
+  @Delete(':id')
+  deleteProductFromCategory(@Param('id') id: number) {
+    return this.categoryService.deleteProductFromCategory(id);
+  }
+
+  @Get(':showAllCategoryProducts')
+  show() {
+    return this.categoryService.showAllCategoryProducts();
+  }
 
   @Get()
   getAll() {

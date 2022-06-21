@@ -2,12 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Category } from './category.model';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { CategoryProducts } from './category-products.model';
+import { AddProductToCategoryDto } from './dto/add-product-to-category.dto';
 
 @Injectable()
 export class CategoryService {
   constructor(
     @InjectModel(Category)
     private categoryRepository: typeof Category,
+    @InjectModel(CategoryProducts)
+    private categoryProductsRepository: typeof CategoryProducts,
   ) {}
 
   async getAll(): Promise<Category[]> {
@@ -19,17 +23,34 @@ export class CategoryService {
   }
 
   async create(dto: CreateCategoryDto) {
-    const newUser = await this.categoryRepository.create(dto);
-    return newUser;
+    const category = await this.categoryRepository.create(dto);
+    return category;
   }
 
   async remove(id: number): Promise<void> {
-    const user = await this.getById(id);
-    await user.destroy();
+    const category = await this.getById(id);
+    await category.destroy();
   }
 
   async update(id: number, dto: CreateCategoryDto) {
-    const user = await this.getById(id);
-    return user.update(dto);
+    const category = await this.getById(id);
+    return category.update(dto);
+  }
+
+  async addProductToCategory(dto: AddProductToCategoryDto) {
+    const add = await this.categoryProductsRepository.create(dto);
+    return add;
+  }
+
+  async deleteProductFromCategory(id: number) {
+    const deletion = await this.getById(id);
+    await deletion.destroy();
+  }
+
+  async showAllCategoryProducts(): Promise<CategoryProducts[]> {
+    const all = await this.categoryProductsRepository.findAll({
+      include: { all: true },
+    });
+    return all;
   }
 }
