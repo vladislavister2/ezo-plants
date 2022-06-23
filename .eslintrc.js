@@ -40,6 +40,8 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-unresolved':'off',
     'import/no-extraneous-dependencies': 'off',
-    'no-useless-constructor':'off'
+    'no-useless-constructor':'off',
+    'no-unused-vars':'off',
+    'no-empty-function':'off',
   },
 };

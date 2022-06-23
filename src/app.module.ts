@@ -21,6 +21,7 @@ import { CartProducts } from './cart/cart-products.model';
 import { Cart } from './cart/cart.model';
 import { OrderModule } from './order/order.module';
 import { Order } from "./order/order.model";
+import { UsersService } from "./users/users.service";
 
 @Module({
   imports: [

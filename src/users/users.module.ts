@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from "@nestjs/common";
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
@@ -8,12 +8,22 @@ import { RolesModule } from '../roles/roles.module';
 import { UserRoles } from '../roles/user-roles.model';
 import { Cart } from '../cart/cart.model';
 import { CartModule } from '../cart/cart.module';
+import { AuthModule } from "../auth/auth.module";
+import { JwtModule } from "@nestjs/jwt";
+import { ExecutionContext } from "@nestjs/common/interfaces/features/execution-context.interface";
 
 @Module({
   imports: [
     SequelizeModule.forFeature([User, Role, UserRoles, Cart]),
     RolesModule,
     CartModule,
+    JwtModule.register({
+      secret: process.env.PRIVATE_KEY || 'SECRET',
+      signOptions: {
+        expiresIn: '24h',
+      },
+    }),
+    forwardRef(() => AuthModule),
   ],
   exports: [UsersService],
   controllers: [UsersController],

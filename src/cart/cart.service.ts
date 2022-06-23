@@ -22,9 +22,14 @@ export class CartService {
     return this.cartRepository.findByPk(id);
   }
 
-  async create(UserId: number) {
-    const newCart = await this.cartRepository.create({ userId: UserId });
+  async create(userId: number) {
+    const newCart = await this.cartRepository.create({ userId });
     return newCart;
+  }
+
+  async delete(cartId: number): Promise<void>{
+    const cart = await this.getById(cartId);
+    return cart.destroy();
   }
 
 

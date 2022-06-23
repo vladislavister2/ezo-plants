@@ -14,6 +14,7 @@ import { CartProducts } from './cart-products.model';
 import { Order } from '../order/order.model';
 
 interface CartCreationAttrs {
+  id: number;
   userId: number;
 }
 
