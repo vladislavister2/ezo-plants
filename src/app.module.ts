@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from "@nestjs/common";
 import { HttpModule } from '@nestjs/axios';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
@@ -21,7 +21,8 @@ import { CartProducts } from './cart/cart-products.model';
 import { Cart } from './cart/cart.model';
 import { OrderModule } from './order/order.module';
 import { Order } from "./order/order.model";
-import { UsersService } from "./users/users.service";
+import { WinstonModule } from "nest-winston";
+import { transports, format } from 'winston';
 
 @Module({
   imports: [
@@ -52,6 +53,22 @@ import { UsersService } from "./users/users.service";
       ],
       autoLoadModels: true,
     }),
+    WinstonModule.forRoot({
+      level: 'info',
+      format: format.combine(
+        format.timestamp({
+          format: 'YYYY/MM/DD HH:mm:ss',
+        }),
+        format.errors({ stack: true }),
+        format.splat(),
+        format.simple(),
+      ),
+      defaultMeta: { service: 'product-selling-service' },
+      transports: [
+        new transports.File({ filename: 'error.log', level: 'error' }),
+        new transports.File({ filename: 'combined.log' }),
+      ],
+    }),
     RolesModule,
     UsersModule,
     AuthModule,
@@ -60,6 +77,6 @@ import { UsersService } from "./users/users.service";
     OrderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, Logger],
 })
 export class AppModule {}

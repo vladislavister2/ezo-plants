@@ -31,7 +31,7 @@ export class UsersService {
   }
 
   async getById(id: number): Promise<User> {
-    const user = await this.usersRepository.findByPk(id);
+    const user = await this.usersRepository.findByPk(id, {include: {all: true}});
     return user;
   }
 

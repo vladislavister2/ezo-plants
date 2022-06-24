@@ -1,4 +1,4 @@
-import { forwardRef, Module } from "@nestjs/common";
+import { forwardRef, Logger, Module } from "@nestjs/common";
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
@@ -11,6 +11,7 @@ import { CartModule } from '../cart/cart.module';
 import { AuthModule } from "../auth/auth.module";
 import { JwtModule } from "@nestjs/jwt";
 import { ExecutionContext } from "@nestjs/common/interfaces/features/execution-context.interface";
+import { WinstonModule } from "nest-winston";
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ExecutionContext } from "@nestjs/common/interfaces/features/execution-c
       },
     }),
     forwardRef(() => AuthModule),
+    WinstonModule,
   ],
   exports: [UsersService],
   controllers: [UsersController],
